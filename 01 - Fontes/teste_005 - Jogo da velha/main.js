@@ -5,6 +5,61 @@ var playOver = false;
 
 $('#T1').addClass('destaqueImg');
 
+class JogoDaVelha {
+
+    constructor() {
+
+        this.jogadas = [
+            [null,null,null],
+            [null,null,null],
+            [null,null,null]
+        ];
+        this.vez = null;
+        this.acabou = false;
+    }
+
+    jogar(linha, coluna) {
+        if (this.acabou || this.jogadas[linha][coluna] !== null) {
+            return;
+        }
+        this.jogadas[linha][coluna] = this.vez;
+        this.verificarFimDeJogo();
+    }
+
+    verificarLinha(linha) {
+        const primeiraLinha = this.jogadas[linha][0];
+        for (let i = 0; i < this.jogadas[linha].length; i++) {
+            if (!this.jogadas[linha][i] || this.jogadas[linha][i] !== primeiraLinha) {
+                return false;
+            }
+        } return primeiraLinha;
+     }
+
+    verificarColuna(coluna) {
+        const primeiraColuna = this.jogadas[0][coluna];
+        for (let i = 0; i < this.jogadas[coluna].length; i++) {
+            if (!this.jogadas[i][coluna] || this.jogadas[i][coluna] !== primeiraColuna) {
+                return false;
+            }
+        } return primeiraColuna;
+    }
+
+    verificarDiagonal(linha, coluna) {
+        if ((linha===0 && coluna===1) ||
+            (linha==1 && coluna==0) ||
+            (linha==1 && coluna==2) ||
+            (linha==2 && coluna==1)) {
+            return false;
+        }
+    }
+
+    verificarFimDeJogo() {
+
+    }
+}
+
+const fJogo = new JogoDaVelha();
+
 function atualizaTitulo () {
   if (playTime == play1) {
     if ($('#T1').hasClass('destaqueImg')) {

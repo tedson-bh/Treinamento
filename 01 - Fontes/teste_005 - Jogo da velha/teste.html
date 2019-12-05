@@ -13,10 +13,11 @@
         background: yellow;
       }
       .principal {
-          width: 800px;
-          height: 700px;
+          width: 300px;
+          height: 300px;
           background-color: gray;
           border: 1px solid;
+          margin: 50px auto;
       }
 
       .camada1 {
@@ -27,14 +28,23 @@
           position: absolute;
       }
 
-      .camada1B {
+      .camada2 {
           width: 300px;
-          height: 125px;
+          height: 300px;
           border: 1px solid;
-          background: #00f;
+          background: #f00;
+          position: absolute;
       }
 
-      .camada2 {
+      .camada3 {
+          width: 300px;
+          height: 300px;
+          border: 1px solid;
+          background: #f00;
+          position: absolute;
+      }
+
+      .camada4 {
           width: 300px;
           height: 300px;
           border: 1px solid;
@@ -45,20 +55,27 @@
           width: 100px;
           height: 300px;
           background-size: 10px 300px;
-          background-image: url('reta_v.png');
           background-position: center;
           background-repeat: no-repeat;
-          position: absolute;
+          float: left;
       }
 
       .colunasHorizontais {
           width: 300px;
           height: 100px;
           background-size: 300px 10px;
-          background-image: url('reta_h.png');
           background-position: center;
           background-repeat: no-repeat;
           float: left;
+      }
+
+      .colunasDiagonais {
+          width: 300px;
+          height: 300px;
+          background-size: 300px 300px;
+          background-position: center;
+          background-repeat: no-repeat;
+          position: absolute;
       }
 
       .tabuleiro {
@@ -76,19 +93,25 @@
 
   <body>
     <div id class = 'principal'>
-      <p>PRINCIPAL 2</p>
 
       <div id class = 'camada1'>
           <div id='col1' class = 'colunasVerticais'></div>
           <div id='col2' class = 'colunasVerticais'></div>
           <div id='col3' class = 'colunasVerticais'></div>
+      </div>
 
+      <div id class = 'camada2'>
           <div id='lin1' class = 'colunasHorizontais'></div>
           <div id='lin2' class = 'colunasHorizontais'></div>
           <div id='lin3' class = 'colunasHorizontais'></div>
       </div>
 
-      <div id class = 'camada2'>
+      <div id class = 'camada3'>
+          <div id='Dia1' class = 'colunasDiagonais'></div>
+          <div id='Dia2' class = 'colunasDiagonais'></div>
+      </div>
+
+      <div id class = 'camada3'>
           <div id='tab1' class = 'tabuleiro'></div>
           <div id='tab2' class = 'tabuleiro'></div>
           <div id='tab3' class = 'tabuleiro'></div>
