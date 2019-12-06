@@ -26,7 +26,7 @@ class JogoDaVelha {
         this.verificarFimDeJogo(linha, coluna);
     }
 
-    verificarLinha(linha, coluna) {
+    verificarLinha(linha) {
         const primeiraColuna = this.jogadas[linha][0];
         for (let i = 0; i < this.jogadas.length; i++) {
             if (!this.jogadas[linha][i] || this.jogadas[linha][i] !== primeiraColuna) {
@@ -35,13 +35,39 @@ class JogoDaVelha {
         } return primeiraColuna;
      }
 
-    verificarColuna(linha, coluna) {
+    verificarColuna(coluna) {
         const primeiraLinha = this.jogadas[0][coluna];
-        for (let i = 0; i < this.jogadas[linha].length; i++) {
+        for (let i = 0; i < this.jogadas[0].length; i++) {
             if (!this.jogadas[i][coluna] || this.jogadas[i][coluna] !== primeiraLinha) {
                 return false;
             }
         } return primeiraLinha;
+    }
+
+    verificarDiagonal(linha, coluna) {
+        if ((linha==0 && coluna==1) ||
+            (linha==1 && coluna==0) ||
+            (linha==1 && coluna==2) ||
+            (!this.jogadas[1][1]) ||
+            (linha==2 && coluna==1)) {
+            return false;
+        }
+        const posicaoDeReferencia = this.jogadas[1][1];
+        let colPos = 2
+        if ((linha===0 && coluna===0) || (linha===2 && coluna===2)) {
+            for (let i = 0; i < this.jogadas[linha].length; i++) {
+                if (!this.jogadas[i][i] || this.jogadas[i][i] !== posicaoDeReferencia) {
+                    return false;
+                }
+            } return posicaoDeReferencia;
+        }
+        if ((linha===0 && coluna===2) || (linha===2 && coluna===0)) {
+            for (let i = 0; i < this.jogadas[linha].length; i++) {
+                if (!this.jogadas[i][colPos] || this.jogadas[i][colPos] !== posicaoDeReferencia) {
+                    return false;
+                } colPos--;
+            } return posicaoDeReferencia;
+        }
     }
 
     verificarDiagonal1(linha, coluna) {
@@ -82,10 +108,11 @@ class JogoDaVelha {
     }
 
     verificarFimDeJogo(linha, coluna) {
-        if ((this.verificarLinha(linha, coluna)) ||
-            (this.verificarColuna(linha, coluna)) ||
-            (this.verificarDiagonal1(linha, coluna)) ||
-            (this.verificarDiagonal2(linha, coluna))) {
+        if ((this.verificarLinha(linha)) ||
+            (this.verificarColuna(coluna)) ||
+            /*(this.verificarDiagonal1(linha, coluna)) ||
+            (this.verificarDiagonal2(linha, coluna))) {*/
+            (this.verificarDiagonal(linha, coluna))) {
             console.log('jogo acabou!');
         } return false;
     }
