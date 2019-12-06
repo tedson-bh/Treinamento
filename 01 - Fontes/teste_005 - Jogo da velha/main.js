@@ -70,48 +70,9 @@ class JogoDaVelha {
         }
     }
 
-    verificarDiagonal1(linha, coluna) {
-        if ((linha==0 && coluna==1) ||
-            (linha==0 && coluna==2) ||
-            (linha==1 && coluna==0) ||
-            (linha==1 && coluna==2) ||
-            (!this.jogadas[1][1]) ||
-            (linha==2 && coluna==0) ||
-            (linha==2 && coluna==1)) {
-            return false;
-        }
-        const posicaoDeReferencia1 = this.jogadas[linha][coluna];
-        for (let i = 0; i < this.jogadas[linha].length; i++) {
-            if (!this.jogadas[i][i] || this.jogadas[i][i] !== posicaoDeReferencia1) {
-                return false;
-            }
-        } return posicaoDeReferencia1;
-    }
-
-    verificarDiagonal2(linha, coluna) {
-        if ((linha===0 && coluna===0) ||
-            (linha===0 && coluna===1) ||
-            (linha===1 && coluna===0) ||
-            (linha===1 && coluna===2) ||
-            (!this.jogadas[1][1]) ||
-            (linha===2 && coluna===1) ||
-            (linha===2 && coluna===2)) {
-            return false;
-        }
-        const posicaoDeReferencia2 = this.jogadas[linha][coluna];
-        let colPos = 2
-        for (let i = 0; i < this.jogadas[linha].length; i++) {
-            if (!this.jogadas[i][colPos] || this.jogadas[i][colPos] !== posicaoDeReferencia2) {
-                return false;
-            } colPos--;
-        } return posicaoDeReferencia2;
-    }
-
     verificarFimDeJogo(linha, coluna) {
         if ((this.verificarLinha(linha)) ||
             (this.verificarColuna(coluna)) ||
-            /*(this.verificarDiagonal1(linha, coluna)) ||
-            (this.verificarDiagonal2(linha, coluna))) {*/
             (this.verificarDiagonal(linha, coluna))) {
             console.log('jogo acabou!');
         } return false;
