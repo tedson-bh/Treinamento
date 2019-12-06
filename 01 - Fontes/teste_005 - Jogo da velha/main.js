@@ -31,8 +31,8 @@ class JogoDaVelha {
         for (let i = 0; i < this.jogadas[linha].length; i++) {
             if (!this.jogadas[linha][i] || this.jogadas[linha][i] !== primeiraLinha) {
                 return false;
-            }
-        } return primeiraLinha;
+            } return primeiraLinha;
+        }
      }
 
     verificarColuna(coluna) {
@@ -40,21 +40,48 @@ class JogoDaVelha {
         for (let i = 0; i < this.jogadas[coluna].length; i++) {
             if (!this.jogadas[i][coluna] || this.jogadas[i][coluna] !== primeiraColuna) {
                 return false;
-            }
-        } return primeiraColuna;
-    }
-
-    verificarDiagonal(linha, coluna) {
-        if ((linha===0 && coluna===1) ||
-            (linha==1 && coluna==0) ||
-            (linha==1 && coluna==2) ||
-            (linha==2 && coluna==1)) {
-            return false;
+            } return primeiraColuna;
         }
     }
 
-    verificarFimDeJogo() {
+    verificarDiagonal1(linha, coluna) {
+        if ((linha==0 && coluna==1) ||
+            (linha==0 && coluna==2) ||
+            (linha==1 && coluna==0) ||
+            (linha==1 && coluna==2) ||
+            (!this.jogadas[1][1]) ||
+            (linha==2 && coluna==0) ||
+            (linha==2 && coluna==1)) {
+            return false;
+        }
+        const primeiraDiagonal1 = this.jogadas[linha][coluna];
+        for (let i = 0; i < this.jogadas[linha].length; i++) {
+            if (!this.jogadas[i][i] || this.jogadas[i][i] !== primeiraDiagonal1) {
+                return false;
+            }
+        } return primeiraDiagonal1;
+    }
 
+    verificarDiagonal2(linha, coluna) {
+        if ((linha===0 && coluna===0) ||
+            (linha===0 && coluna===1) ||
+            (linha===1 && coluna===0) ||
+            (linha===1 && coluna===2) ||
+            (!this.jogadas[1][1]) ||
+            (linha===2 && coluna===1) ||
+            (linha===2 && coluna===2)) {
+            return false;
+        }
+        const primeiraDiagonal2 = this.jogadas[linha][coluna];
+        let colPos = 2
+        for (let i = 0; i < this.jogadas[linha].length; i++) {
+            if (!this.jogadas[i][colPos] || this.jogadas[i][colPos] !== primeiraDiagonal2) {
+                return false;
+            } colPos--;
+        } return primeiraDiagonal2;
+    }
+
+    verificarFimDeJogo() {
     }
 }
 
