@@ -23,25 +23,25 @@ class JogoDaVelha {
             return;
         }
         this.jogadas[linha][coluna] = this.vez;
-        this.verificarFimDeJogo();
+        this.verificarFimDeJogo(linha, coluna);
     }
 
-    verificarLinha(linha) {
-        const primeiraLinha = this.jogadas[linha][0];
-        for (let i = 0; i < this.jogadas[linha].length; i++) {
-            if (!this.jogadas[linha][i] || this.jogadas[linha][i] !== primeiraLinha) {
+    verificarLinha(linha, coluna) {
+        const primeiraColuna = this.jogadas[linha][0];
+        for (let i = 0; i < this.jogadas.length; i++) {
+            if (!this.jogadas[linha][i] || this.jogadas[linha][i] !== primeiraColuna) {
                 return false;
-            } return primeiraLinha;
-        }
+            }
+        } return primeiraColuna;
      }
 
-    verificarColuna(coluna) {
-        const primeiraColuna = this.jogadas[0][coluna];
-        for (let i = 0; i < this.jogadas[coluna].length; i++) {
-            if (!this.jogadas[i][coluna] || this.jogadas[i][coluna] !== primeiraColuna) {
+    verificarColuna(linha, coluna) {
+        const primeiraLinha = this.jogadas[0][coluna];
+        for (let i = 0; i < this.jogadas[linha].length; i++) {
+            if (!this.jogadas[i][coluna] || this.jogadas[i][coluna] !== primeiraLinha) {
                 return false;
-            } return primeiraColuna;
-        }
+            }
+        } return primeiraLinha;
     }
 
     verificarDiagonal1(linha, coluna) {
@@ -54,12 +54,12 @@ class JogoDaVelha {
             (linha==2 && coluna==1)) {
             return false;
         }
-        const primeiraDiagonal1 = this.jogadas[linha][coluna];
+        const posicaoDeReferencia1 = this.jogadas[linha][coluna];
         for (let i = 0; i < this.jogadas[linha].length; i++) {
-            if (!this.jogadas[i][i] || this.jogadas[i][i] !== primeiraDiagonal1) {
+            if (!this.jogadas[i][i] || this.jogadas[i][i] !== posicaoDeReferencia1) {
                 return false;
             }
-        } return primeiraDiagonal1;
+        } return posicaoDeReferencia1;
     }
 
     verificarDiagonal2(linha, coluna) {
@@ -72,16 +72,22 @@ class JogoDaVelha {
             (linha===2 && coluna===2)) {
             return false;
         }
-        const primeiraDiagonal2 = this.jogadas[linha][coluna];
+        const posicaoDeReferencia2 = this.jogadas[linha][coluna];
         let colPos = 2
         for (let i = 0; i < this.jogadas[linha].length; i++) {
-            if (!this.jogadas[i][colPos] || this.jogadas[i][colPos] !== primeiraDiagonal2) {
+            if (!this.jogadas[i][colPos] || this.jogadas[i][colPos] !== posicaoDeReferencia2) {
                 return false;
             } colPos--;
-        } return primeiraDiagonal2;
+        } return posicaoDeReferencia2;
     }
 
-    verificarFimDeJogo() {
+    verificarFimDeJogo(linha, coluna) {
+        if ((this.verificarLinha(linha, coluna)) ||
+            (this.verificarColuna(linha, coluna)) ||
+            (this.verificarDiagonal1(linha, coluna)) ||
+            (this.verificarDiagonal2(linha, coluna))) {
+            console.log('jogo acabou!');
+        } return false;
     }
 }
 
