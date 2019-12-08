@@ -44,37 +44,23 @@ class JogoDaVelha {
         } return primeiraLinha;
     }
 
-    verificarDiagonal(linha, coluna) {
-        if ((linha==0 && coluna==1) ||
-            (linha==1 && coluna==0) ||
-            (linha==1 && coluna==2) ||
-            (!this.jogadas[1][1]) ||
-            (linha==2 && coluna==1)) {
-            return false;
-        }
+    verificarDiagonal(coluna, variavel) {
+        let colPos = coluna
         const posicaoDeReferencia = this.jogadas[1][1];
-        let colPos = 2
-        if ((linha===0 && coluna===0) || (linha===2 && coluna===2)) {
-            for (let i = 0; i < this.jogadas[linha].length; i++) {
-                if (!this.jogadas[i][i] || this.jogadas[i][i] !== posicaoDeReferencia) {
-                    return false;
-                }
-            } return posicaoDeReferencia;
-        }
-        if ((linha===0 && coluna===2) || (linha===2 && coluna===0)) {
-            for (let i = 0; i < this.jogadas[linha].length; i++) {
-                if (!this.jogadas[i][colPos] || this.jogadas[i][colPos] !== posicaoDeReferencia) {
-                    return false;
-                } colPos--;
-            } return posicaoDeReferencia;
-        }
+        for (let i = 0; i < this.jogadas.length; i++) {
+            if (!this.jogadas[i][colPos] || this.jogadas[i][colPos] !== posicaoDeReferencia) {
+                return false;
+            } colPos = colPos + variavel
+        } return posicaoDeReferencia;
     }
 
     verificarFimDeJogo(linha, coluna) {
         if ((this.verificarLinha(linha)) ||
             (this.verificarColuna(coluna)) ||
-            (this.verificarDiagonal(linha, coluna))) {
+            (this.verificarDiagonal(0, 1)) ||
+            (this.verificarDiagonal(2, -1))) {
             console.log('jogo acabou!');
+            console.log('O vencedor foi: ' + this.vez);
         } return false;
     }
 }
@@ -146,73 +132,53 @@ function vencedor() {
   var c3 = $('#C3').attr('move');
 
   var ganha = ''
-  /*var eixo = ''
-  var tipo = ''*/
 
   if (a1 != '' && a1 == b2 && a1 == c3)
       {
         ganha = a1;
-        /*eixo = 'D1';
-        tipo = 'reta_d1'*/
       }
 
   else if (a3 != '' && a3 == b2 && a3 == c1)
       {
         ganha = a3;
-        /*eixo = 'D2';
-        tipo = 'reta_d2'*/
       }
 
   else if (a1 != '' && a1 == b1 && a1 == c1)
       {
         ganha = a1;
-        /*eixo = 'C1';
-        tipo = 'reta_v'*/
       }
 
   else if (a2 != '' && a2 == b2 && a2 == c2)
       {
         ganha = a2;
-        /*eixo = 'C2';
-        tipo = 'reta_v'*/
       }
 
   else if (a3 != '' && a3 == b3 && a3 == c3)
       {
         ganha = a3;
-        /*eixo = 'C3';
-        tipo = 'reta_v'*/
       }
 
   else if (a1 != '' && a1 == a2 && a1 == a3)
       {
         ganha = a1;
-        /*eixo = 'L1';
-        tipo = 'reta_h'*/
       }
 
   else if (b1 != '' && b1 == b2 && b1 == b3)
       {
         ganha = b1;
-        /*eixo = 'L2';
-        tipo = 'reta_h'*/
       }
 
   else if (c1 != '' && c1 == c2 && c1 == c3)
       {
         ganha = c1;
-        /*eixo = 'L3';
-        tipo = 'reta_h'*/
       }
 
   if (ganha != '') {
     playOver = true;
     if (ganha == 'o') {
       $('#ganhador').addClass('bola');
-      /*$("#"+eixo).addClass(tipo);*/
     } else {
       $('#ganhador').addClass('xis');
-      /*$('#'+eixo).addClass(tipo);*/
     }
   }
 
