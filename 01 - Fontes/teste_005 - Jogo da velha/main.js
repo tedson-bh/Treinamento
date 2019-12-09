@@ -24,8 +24,8 @@ class JogoDaVelha {
             return;
         }
         this.jogadas[linha][coluna] = this.vez;
+        this.nroJogada++;
         this.verificarFimDeJogo(linha, coluna);
-        this.nroJogada = nroJogada++;
     }
 
     verificarLinha(linha) {
@@ -48,28 +48,46 @@ class JogoDaVelha {
         return primeiraLinha;
     }
 
-    verificarDiagonal(coluna, variavel) {
-        let colPos = coluna
+    verificarDiagonal(coluna, direcao) {
         const posicaoDeReferencia = this.jogadas[1][1];
         for (let i = 0; i < this.jogadas.length; i++) {
-            if (!this.jogadas[i][colPos] || this.jogadas[i][colPos] !== posicaoDeReferencia) {
-                return false;
-            } colPos = colPos + variavel
+            const linha = this.jogadas[i];
+            for (let j = coluna; j < linha.length; j+= direcao) {
+                if (direcao === 1 && i !== j) {
+                    continue;
+                }
+                if (direcao === -1 && i !== coluna - j) {
+                    continue;
+                }
+                if (!linha[j] || linha[j] !== posicaoDeReferencia) {
+                    return false;
+                }
+            }
         }
         return posicaoDeReferencia;
     }
 
     verificarFimDeJogo(linha, coluna) {
-        if (nroJogada>=5) {
-            if ((this.verificarLinha(linha)) ||
-                (this.verificarColuna(coluna)) ||
-                (this.verificarDiagonal(0, 1)) ||
-                (this.verificarDiagonal(2, -1))) {
-                console.log('jogo acabou!');
-                console.log('O vencedor foi: ' + this.vez);
-            }
+        if (this.nroJogada<5) {
             return false;
         }
+        const vencedor =
+            this.verificarLinha(linha) ||
+            this.verificarColuna(coluna) ||
+            this.verificarDiagonal(0, 1) ||
+            this.verificarDiagonal(2, -1);
+
+        if (vencedor) {
+            this.acabou = true;
+            console.log('jogo acabou!');
+            console.log('O vencedor foi: ' + this.vez);
+            return vencedor;
+        }
+        if (this.nroJogada === 9) {
+            this.acabou = true;
+            return 'velha';
+        }
+        return false;
     }
 }
 
