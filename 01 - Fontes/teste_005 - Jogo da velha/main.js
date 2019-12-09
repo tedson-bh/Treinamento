@@ -16,6 +16,7 @@ class JogoDaVelha {
         ];
         this.vez = null;
         this.acabou = false;
+        this.nroJogada = 0;
     }
 
     jogar(linha, coluna) {
@@ -24,6 +25,7 @@ class JogoDaVelha {
         }
         this.jogadas[linha][coluna] = this.vez;
         this.verificarFimDeJogo(linha, coluna);
+        this.nroJogada = nroJogada++;
     }
 
     verificarLinha(linha) {
@@ -32,7 +34,8 @@ class JogoDaVelha {
             if (!this.jogadas[linha][i] || this.jogadas[linha][i] !== primeiraColuna) {
                 return false;
             }
-        } return primeiraColuna;
+        }
+        return primeiraColuna;
      }
 
     verificarColuna(coluna) {
@@ -41,7 +44,8 @@ class JogoDaVelha {
             if (!this.jogadas[i][coluna] || this.jogadas[i][coluna] !== primeiraLinha) {
                 return false;
             }
-        } return primeiraLinha;
+        }
+        return primeiraLinha;
     }
 
     verificarDiagonal(coluna, variavel) {
@@ -51,17 +55,21 @@ class JogoDaVelha {
             if (!this.jogadas[i][colPos] || this.jogadas[i][colPos] !== posicaoDeReferencia) {
                 return false;
             } colPos = colPos + variavel
-        } return posicaoDeReferencia;
+        }
+        return posicaoDeReferencia;
     }
 
     verificarFimDeJogo(linha, coluna) {
-        if ((this.verificarLinha(linha)) ||
-            (this.verificarColuna(coluna)) ||
-            (this.verificarDiagonal(0, 1)) ||
-            (this.verificarDiagonal(2, -1))) {
-            console.log('jogo acabou!');
-            console.log('O vencedor foi: ' + this.vez);
-        } return false;
+        if (nroJogada>=5) {
+            if ((this.verificarLinha(linha)) ||
+                (this.verificarColuna(coluna)) ||
+                (this.verificarDiagonal(0, 1)) ||
+                (this.verificarDiagonal(2, -1))) {
+                console.log('jogo acabou!');
+                console.log('O vencedor foi: ' + this.vez);
+            }
+            return false;
+        }
     }
 }
 
@@ -103,7 +111,7 @@ function jogar(jogador, posicao) {
       if ($('#' + posicao).hasClass('xis')) {
         return;
       } else {
-        $('#' + posicao).addClass(jogador);
+        $('#' + posicao + 'b').addClass(jogador);
         $('#' + posicao)[0].setAttribute('move', playTime);
         if (playTime == play1) {
           playTime = play2;
@@ -131,46 +139,64 @@ function vencedor() {
   var c2 = $('#C2').attr('move');
   var c3 = $('#C3').attr('move');
 
-  var ganha = ''
+  let ganha = ''
+  let divGanha = ''
+  let imgGanha = ''
 
   if (a1 != '' && a1 == b2 && a1 == c3)
       {
         ganha = a1;
+        divGanha = dia1;
+        imgGanha = 'reta_d1'
       }
 
   else if (a3 != '' && a3 == b2 && a3 == c1)
       {
         ganha = a3;
+        divGanha = dia2;
+        imgGanha = 'reta_d2'
       }
 
   else if (a1 != '' && a1 == b1 && a1 == c1)
       {
         ganha = a1;
+        divGanha = col1;
+        imgGanha = 'reta_v'
       }
 
   else if (a2 != '' && a2 == b2 && a2 == c2)
       {
         ganha = a2;
+        divGanha = col2;
+        imgGanha = 'reta_v'
       }
 
   else if (a3 != '' && a3 == b3 && a3 == c3)
       {
         ganha = a3;
+        divGanha = col3;
+        imgGanha = 'reta_v'
       }
 
   else if (a1 != '' && a1 == a2 && a1 == a3)
       {
         ganha = a1;
+        divGanha = lin1;
+        imgGanha = 'reta_h'
       }
 
   else if (b1 != '' && b1 == b2 && b1 == b3)
       {
         ganha = b1;
+        divGanha = lin2;
+        imgGanha = 'reta_h'
       }
 
   else if (c1 != '' && c1 == c2 && c1 == c3)
       {
         ganha = c1;
+        divGanha = lin3;
+        imgGanha = 'reta_h'
       }
 
   if (ganha != '') {
@@ -180,6 +206,7 @@ function vencedor() {
     } else {
       $('#ganhador').addClass('xis');
     }
+    $(divGanha).addClass(imgGanha);
   }
 
 }
@@ -202,7 +229,7 @@ function onClickTab(ev) {
 }
 
 $(function onReady() {
-  $('.principal').on('click', '.tamanhoid', onClickTab);
+  $('.camada5').on('click', '.tamanhoid', onClickTab);
 });
 
 $(function onReadyImg() {

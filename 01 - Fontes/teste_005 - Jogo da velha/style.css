@@ -54,6 +54,72 @@
   margin: 50px auto;
 }
 
+.camada1 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+}
+
+.camada2 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+}
+
+.camada3 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+}
+
+.camada4 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+}
+
+.camada5 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+}
+
+.colunasHorizontais {
+    width: 300px;
+    height: 100px;
+    background-size: 300px 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+.colunasVerticais {
+    width: 100px;
+    height: 300px;
+    background-size: 10px 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+.colunasDiagonais {
+    width: 300px;
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+.tabuleirob {
+  width: 100px;
+  height: 100px;
+  float: left;
+  background-color: transparent;
+  background-size: 80px 80px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .tamanhoid {
   width: 100px;
   height: 100px;
@@ -70,4 +136,20 @@
 
 .xis {
   background-image: url("x.png");
+}
+
+.reta_h {
+    background-image: url("reta_h.png");
+}
+
+.reta_v {
+    background-image: url("reta_v.png");
+}
+
+.reta_d1 {
+    background-image: url("reta_d1.png");
+}
+
+.reta_d2 {
+    background-image: url("reta_d2.png");
 }
